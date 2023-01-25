@@ -1,9 +1,8 @@
 package com.allstate.speedyclaimsserver.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -15,9 +14,12 @@ public class Action {
     private String actionTaken;
     private Integer actionPolicyNumber;
 
+    @ManyToOne
+    private Claim claim;
 
-    public Action(Integer actionId, String actionTaken, Integer actionPolicyNumber) {
-        this.actionId = actionId;
+
+    public Action(String actionTaken, Integer actionPolicyNumber) {
+        //this.actionId = actionId;
         this.actionTaken = actionTaken;
         this.actionPolicyNumber = actionPolicyNumber;
     }
@@ -27,9 +29,14 @@ public class Action {
     }
 
 
+    @JsonIgnore
+    public Claim getClaim() {
+        return claim;
+    }
 
-
-
+    public void setClaim(Claim claim) {
+        this.claim = claim;
+    }
 
     public Integer getActionId() {
         return actionId;

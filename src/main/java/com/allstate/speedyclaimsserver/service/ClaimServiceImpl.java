@@ -42,4 +42,9 @@ public class ClaimServiceImpl implements ClaimService {
     public List<Claim> getByClaimType(String type) {
         return claimRepository.findAllByClaimType(type);
     }
+
+    @Override
+    public Claim saveClaim(Claim claim) {
+        return claimRepository.save(claim);
+    }
 }

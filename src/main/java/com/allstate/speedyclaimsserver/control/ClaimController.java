@@ -35,4 +35,10 @@ public class ClaimController {
     }
 
 
+    @PostMapping
+    public Claim saveNewClaim(@RequestBody Claim claim) {
+        return claimService.saveClaim(claim);
+    }
+
+
 }

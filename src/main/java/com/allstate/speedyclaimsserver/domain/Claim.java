@@ -1,10 +1,8 @@
 package com.allstate.speedyclaimsserver.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,6 +17,15 @@ public class Claim {
     private String claimType;
     private String vehicleMake;
     private String vehicleModel;
+
+//    public Action getAction() {
+//        return action;
+//    }
+//
+//    public void setAction(Action action) {
+//        this.action = action;
+//    }
+
     private Integer vehicleYear;
     private String propertyAddress;
     private String animalType;
@@ -29,10 +36,21 @@ public class Claim {
     private String claimStatus;
     private String approvedPayoutAmount;
 
-    private String[] actionsLog;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Action> actions;
+
+    //private String[] actionsLog;
 
 
-    public Claim(String surname, String firstName, Date claimDate, String claimType, String vehicleMake, String vehicleModel, Integer vehicleYear, String propertyAddress, String animalType, String breedType, Double claimAmount, String reasonForClaim, String otherInfo, String claimStatus, String approvedPayoutAmount, String[] actionsLog) {
+    public List<Action> getActions() {
+        return actions;
+    }
+
+    public void setActions(List<Action> actions) {
+        this.actions = actions;
+    }
+
+    public Claim(String surname, String firstName, Date claimDate, String claimType, String vehicleMake, String vehicleModel, Integer vehicleYear, String propertyAddress, String animalType, String breedType, Double claimAmount, String reasonForClaim, String otherInfo, String claimStatus, String approvedPayoutAmount, List<Action> actions) {
         //this.policyNumber = policyNumber;
         this.surname = surname;
         this.firstName = firstName;
@@ -49,7 +67,8 @@ public class Claim {
         this.otherInfo = otherInfo;
         this.claimStatus = claimStatus;
         this.approvedPayoutAmount = approvedPayoutAmount;
-        this.actionsLog = actionsLog;
+        //this.actionsLog = actionsLog;
+        this.actions = actions;
     }
 
 
@@ -183,6 +202,8 @@ public class Claim {
     public void setApprovedPayoutAmount(String approvedPayoutAmount) {
         this.approvedPayoutAmount = approvedPayoutAmount;
     }
+
+
 
 
 
