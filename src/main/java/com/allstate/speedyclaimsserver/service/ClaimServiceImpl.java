@@ -6,8 +6,8 @@ import com.allstate.speedyclaimsserver.exceptions.ClaimNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ClaimServiceImpl implements ClaimService {
@@ -47,4 +47,66 @@ public class ClaimServiceImpl implements ClaimService {
     public Claim saveClaim(Claim claim) {
         return claimRepository.save(claim);
     }
+
+    @Override
+    public Claim updateClaim(Integer id, HashMap<String, Object> fields) {
+
+        Claim claim = claimRepository.findById(id).get(); //should really check it is there + throw an exception
+
+        //update those fields that have changed
+        if (fields.containsKey("firstName")) {
+            claim.setFirstName(fields.get("firstName").toString());
+        }
+
+        if (fields.containsKey("surname")) {
+            claim.setSurname(fields.get("surname").toString());
+        }
+
+
+        if (fields.containsKey("claimAmount")) {
+            //any logic eg is amount > 0?
+            claim.setClaimAmount(Double.parseDouble(fields.get("claimAmount").toString()));
+        }
+
+        if (fields.containsKey("otherInfo")) {
+            claim.setOtherInfo(fields.get("otherInfo").toString());
+        }
+
+//        for (String field : fields.keySet()) {
+//            switch(field) {
+//                case "country" : payment....
+//                                break;
+//
+//            }
+//        }
+
+        //save and return the payment
+        return claimRepository.save(claim);
+    }
+
+
+//    @Override
+//    public List<Claim> searchName(String name) {
+//
+//        List<Claim> allClaims = claimRepository.findAll();
+//        Set<Claim> foundClaims = new HashSet<>();
+//
+//        for(Claim claim : allClaims){
+//            if(claim.getSurname().contains(name)){
+//                foundClaims.add(claim);
+//            }
+//        }
+//
+//        List<Claim> found = new ArrayList<>(foundClaims);
+//
+//
+//        return found;
+//    }
+
+
+
+
+
+
+
 }

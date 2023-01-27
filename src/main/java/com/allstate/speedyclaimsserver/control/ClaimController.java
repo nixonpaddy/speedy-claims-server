@@ -6,11 +6,12 @@ import com.allstate.speedyclaimsserver.service.ClaimService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/claim")
+@CrossOrigin
 public class ClaimController {
 
     @Autowired
@@ -39,6 +40,18 @@ public class ClaimController {
     public Claim saveNewClaim(@RequestBody Claim claim) {
         return claimService.saveClaim(claim);
     }
+
+
+    @PutMapping("/{id}")
+    public Claim updateClaim(@PathVariable Integer id, @RequestBody HashMap<String, Object> fields) {
+        return claimService.updateClaim(id, fields);
+    }
+
+
+//    @GetMapping("/{name}")
+//    public List<Claim> searchName(@PathVariable("name") String name) throws ClaimNotFoundException {
+//        return claimService.searchName(name);
+//    }
 
 
 }
