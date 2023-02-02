@@ -11,15 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/action")
 public class ActionController {
+
 
     @Autowired
     private ActionService actionService;
 
 
-    @GetMapping
+
+    @GetMapping("/{claimId}")
     public List<Action> getAllActions(){
         return actionService.getAllActions();
     }

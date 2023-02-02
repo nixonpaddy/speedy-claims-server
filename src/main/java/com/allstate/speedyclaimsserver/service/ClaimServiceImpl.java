@@ -5,10 +5,15 @@ import com.allstate.speedyclaimsserver.domain.Claim;
 import com.allstate.speedyclaimsserver.exceptions.ClaimNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import java.sql.Date;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@CrossOrigin
 @Service
 public class ClaimServiceImpl implements ClaimService {
 
@@ -72,6 +77,66 @@ public class ClaimServiceImpl implements ClaimService {
             claim.setOtherInfo(fields.get("otherInfo").toString());
         }
 
+
+        if (fields.containsKey("claimDate")) {
+            String newDate = fields.get("claimDate").toString();
+            claim.setClaimDate( Date.valueOf(newDate));
+        }
+
+
+        if (fields.containsKey("claimType")) {
+            claim.setClaimType(fields.get("claimType").toString());
+        }
+
+        if (fields.containsKey("vehicleMake")) {
+            claim.setVehicleMake(fields.get("vehicleMake").toString());
+        }
+
+        if (fields.containsKey("vehicleModel")) {
+            claim.setVehicleModel(fields.get("vehicleModel").toString());
+        }
+
+        if (fields.containsKey("vehicleYear")) {
+            if(fields.get("vehicleYear") == ""){
+                claim.setVehicleYear(null);
+            }else{
+                claim.setVehicleYear(new Integer(fields.get("vehicleYear").toString()));
+            }
+        }
+
+        if (fields.containsKey("propertyAddress")) {
+            claim.setPropertyAddress(fields.get("propertyAddress").toString());
+        }
+
+        if (fields.containsKey("animalType")) {
+            claim.setAnimalType(fields.get("animalType").toString());
+        }
+
+        if (fields.containsKey("breedType")) {
+            claim.setBreedType(fields.get("breedType").toString());
+        }
+
+        if (fields.containsKey("claimAmount")) {
+            if(fields.get("claimAmount") == ""){
+                claim.setClaimAmount(null);
+            }else{
+                claim.setClaimAmount(new Double(fields.get("claimAmount").toString()));
+            }
+        }
+
+        if (fields.containsKey("reasonForClaim")) {
+            claim.setReasonForClaim(fields.get("reasonForClaim").toString());
+        }
+
+
+        if (fields.containsKey("claimStatus")) {
+            claim.setClaimStatus(fields.get("claimStatus").toString());
+        }
+
+        if (fields.containsKey("approvedPayoutAmount")) {
+            claim.setApprovedPayoutAmount(fields.get("approvedPayoutAmount").toString());
+        }
+
 //        for (String field : fields.keySet()) {
 //            switch(field) {
 //                case "country" : payment....
@@ -85,28 +150,57 @@ public class ClaimServiceImpl implements ClaimService {
     }
 
 
-//    @Override
-//    public List<Claim> searchName(String name) {
-//
-//        List<Claim> allClaims = claimRepository.findAll();
-//        Set<Claim> foundClaims = new HashSet<>();
-//
-//        for(Claim claim : allClaims){
-//            if(claim.getSurname().contains(name)){
-//                foundClaims.add(claim);
-//            }
-//        }
-//
-//        List<Claim> found = new ArrayList<>(foundClaims);
-//
-//
-//        return found;
-//    }
+    @Override
+    public List<Claim> searchName(String name) {
+
+        List<Claim> allClaims = claimRepository.findAll();
+        Set<Claim> foundClaims = new HashSet<>();
+
+        for(Claim claim : allClaims){
+            if(claim.getSurname().toLowerCase().contains(name.toLowerCase())){
+                foundClaims.add(claim);
+            }
+        }
+
+        List<Claim> found = new ArrayList<>(foundClaims);
 
 
+        return found;
+    }
+
+    @Override
+    public List<Claim> getOpenClaims() {
+        List<Claim> allClaims = claimRepository.findAll();
+        Set<Claim> foundClaims = new HashSet<>();
+
+        for(Claim claim : allClaims){
+            if(claim.getClaimStatus().equals("Awaiting Assessment") ){
+                foundClaims.add(claim);
+            }
+        }
+
+        List<Claim> found = new ArrayList<>(foundClaims);
 
 
+        return found;
+    }
 
+    @Override
+    public List<Claim> getArchivedClaims() {
+        List<Claim> allClaims = claimRepository.findAll();
+        Set<Claim> foundClaims = new HashSet<>();
+
+        for(Claim claim : allClaims){
+            if(claim.getClaimStatus().equals("Rejected") || claim.getClaimStatus().equals("Accepted - Paid")  ){
+                foundClaims.add(claim);
+            }
+        }
+
+        List<Claim> found = new ArrayList<>(foundClaims);
+
+
+        return found;
+    }
 
 
 }

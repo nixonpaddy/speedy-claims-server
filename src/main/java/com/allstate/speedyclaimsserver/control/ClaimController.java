@@ -48,10 +48,22 @@ public class ClaimController {
     }
 
 
-//    @GetMapping("/{name}")
-//    public List<Claim> searchName(@PathVariable("name") String name) throws ClaimNotFoundException {
-//        return claimService.searchName(name);
-//    }
+    @GetMapping("/name/{name}")
+    public List<Claim> searchName(@PathVariable("name") String name) throws ClaimNotFoundException {
+        return claimService.searchName(name);
+    }
+
+    @GetMapping("/open")
+    public List<Claim> getOpenClaims() {
+        return claimService.getOpenClaims();
+    }
+
+    @GetMapping("/archived")
+    public List<Claim> getArchivedClaims() {
+        return claimService.getArchivedClaims();
+    }
+
+
 
 
 }
