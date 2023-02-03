@@ -8,4 +8,12 @@ import java.util.List;
 public interface ActionService {
 
     List<Action> getAllActions();
+
+    public Action saveNewAction(Action action);
+
+    List<Action> getActionsByPolicy(Integer policyNumber);
+
+
+
+
 }

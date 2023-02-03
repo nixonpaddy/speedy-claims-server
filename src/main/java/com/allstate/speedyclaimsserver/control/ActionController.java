@@ -1,12 +1,11 @@
 package com.allstate.speedyclaimsserver.control;
 
 import com.allstate.speedyclaimsserver.domain.Action;
+import com.allstate.speedyclaimsserver.domain.Claim;
+import com.allstate.speedyclaimsserver.exceptions.ClaimNotFoundException;
 import com.allstate.speedyclaimsserver.service.ActionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,10 +19,28 @@ public class ActionController {
     private ActionService actionService;
 
 
-
-    @GetMapping("/{claimId}")
-    public List<Action> getAllActions(){
+    @GetMapping
+    public List<Action> getAllActions() {
         return actionService.getAllActions();
     }
+
+
+    @PostMapping
+    public Action saveNewAction(@RequestBody Action action) {
+        return actionService.saveNewAction(action);
+    }
+
+
+//    @GetMapping
+//    public List<Action> getActionsByPolicy() {
+//        return actionService.getAllActions();
+//    }
+
+
+    @GetMapping("{policyId}")
+    public List<Action> getActionsByPolicy(@PathVariable("policyId") Integer policyId) throws ClaimNotFoundException {
+        return actionService.getActionsByPolicy(policyId);
+    }
+
 
 }

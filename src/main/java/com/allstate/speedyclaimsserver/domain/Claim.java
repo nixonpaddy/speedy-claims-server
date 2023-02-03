@@ -42,13 +42,13 @@ public class Claim {
     //private String[] actionsLog;
 
 
-    public List<Action> getActions() {
-        return actions;
-    }
-
-    public void setActions(List<Action> actions) {
-        this.actions = actions;
-    }
+//    public List<Action> getActions() {
+//        return actions;
+//    }
+//
+//    public void setActions(List<Action> actions) {
+//        this.actions = actions;
+//    }
 
     public Claim(String surname, String firstName, Date claimDate, String claimType, String vehicleMake, String vehicleModel, Integer vehicleYear, String propertyAddress, String animalType, String breedType, Double claimAmount, String reasonForClaim, String otherInfo, String claimStatus, String approvedPayoutAmount, List<Action> actions) {
         //this.policyNumber = policyNumber;
@@ -201,6 +201,14 @@ public class Claim {
 
     public void setApprovedPayoutAmount(String approvedPayoutAmount) {
         this.approvedPayoutAmount = approvedPayoutAmount;
+    }
+
+    public List<Action> getActions() {
+        return actions;
+    }
+
+    public void setActions(List<Action> actions) {
+        this.actions = actions;
     }
 
 

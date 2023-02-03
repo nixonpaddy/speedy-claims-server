@@ -3,6 +3,7 @@ package com.allstate.speedyclaimsserver.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -14,14 +15,17 @@ public class Action {
     private String actionTaken;
     private Integer actionPolicyNumber;
 
+    private Date actionDate;
+
     @ManyToOne
     private Claim claim;
 
 
-    public Action(String actionTaken, Integer actionPolicyNumber) {
+    public Action(String actionTaken, Integer actionPolicyNumber, Date actionDate) {
         //this.actionId = actionId;
         this.actionTaken = actionTaken;
         this.actionPolicyNumber = actionPolicyNumber;
+        this.actionDate = actionDate;
     }
 
 
@@ -36,6 +40,14 @@ public class Action {
 
     public void setClaim(Claim claim) {
         this.claim = claim;
+    }
+
+    public Date getActionDate() {
+        return actionDate;
+    }
+
+    public void setActionDate(Date actionDate) {
+        this.actionDate = actionDate;
     }
 
     public Integer getActionId() {
