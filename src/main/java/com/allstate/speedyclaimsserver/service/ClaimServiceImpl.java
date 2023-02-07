@@ -50,6 +50,14 @@ public class ClaimServiceImpl implements ClaimService {
 
     @Override
     public Claim saveClaim(Claim claim) {
+
+        if(claim.getClaimAmount() >= 500.00){
+            claim.setClaimStatus("Transferred");
+        }
+
+
+
+
         return claimRepository.save(claim);
     }
 

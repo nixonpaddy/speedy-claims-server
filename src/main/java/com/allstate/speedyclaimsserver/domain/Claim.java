@@ -17,15 +17,6 @@ public class Claim {
     private String claimType;
     private String vehicleMake;
     private String vehicleModel;
-
-//    public Action getAction() {
-//        return action;
-//    }
-//
-//    public void setAction(Action action) {
-//        this.action = action;
-//    }
-
     private Integer vehicleYear;
     private String propertyAddress;
     private String animalType;
@@ -35,22 +26,16 @@ public class Claim {
     private String otherInfo;
     private String claimStatus;
     private String approvedPayoutAmount;
-
     @OneToMany(cascade = CascadeType.ALL)
     private List<Action> actions;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Task> tasks;
 
     //private String[] actionsLog;
 
 
-//    public List<Action> getActions() {
-//        return actions;
-//    }
-//
-//    public void setActions(List<Action> actions) {
-//        this.actions = actions;
-//    }
 
-    public Claim(String surname, String firstName, Date claimDate, String claimType, String vehicleMake, String vehicleModel, Integer vehicleYear, String propertyAddress, String animalType, String breedType, Double claimAmount, String reasonForClaim, String otherInfo, String claimStatus, String approvedPayoutAmount, List<Action> actions) {
+    public Claim(String surname, String firstName, Date claimDate, String claimType, String vehicleMake, String vehicleModel, Integer vehicleYear, String propertyAddress, String animalType, String breedType, Double claimAmount, String reasonForClaim, String otherInfo, String claimStatus, String approvedPayoutAmount, List<Action> actions, List<Task> tasks) {
         //this.policyNumber = policyNumber;
         this.surname = surname;
         this.firstName = firstName;
@@ -69,6 +54,7 @@ public class Claim {
         this.approvedPayoutAmount = approvedPayoutAmount;
         //this.actionsLog = actionsLog;
         this.actions = actions;
+        this.tasks = tasks;
     }
 
 
@@ -211,10 +197,13 @@ public class Claim {
         this.actions = actions;
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
 
-
-
-
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     @Override
     public boolean equals(Object o) {

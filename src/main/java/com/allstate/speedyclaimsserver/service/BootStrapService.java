@@ -2,8 +2,10 @@ package com.allstate.speedyclaimsserver.service;
 
 import com.allstate.speedyclaimsserver.data.ActionRepository;
 import com.allstate.speedyclaimsserver.data.ClaimRepository;
+import com.allstate.speedyclaimsserver.data.TaskRepository;
 import com.allstate.speedyclaimsserver.domain.Action;
 import com.allstate.speedyclaimsserver.domain.Claim;
+import com.allstate.speedyclaimsserver.domain.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +24,15 @@ public class BootStrapService {
     @Autowired
     private ActionRepository actionRepository;
 
+    @Autowired
+    private TaskRepository taskRepository;
+
 
     @PostConstruct
     public void setUpInitialData() {
         int numberOfClaims = claimRepository.findAll().size();
         int numberOfActions = actionRepository.findAll().size();
+        int numberOfTasks= taskRepository.findAll().size();
 
 
 
@@ -46,16 +52,11 @@ public class BootStrapService {
             Action newAction11 = new Action("02/02/2023 - Claim reviewed. Awaiting photographs of damage", 4, Date.valueOf("2023-02-02"));
             Action newAction12 = new Action("12/12/2022 - Claim reviewed. Awaiting vets report", 5, Date.valueOf("2022-12-12"));
             Action newAction13 = new Action("12/16/2022 - Vets report received. Leg not broken, only sprained. Claim rejected", 5, Date.valueOf("2022-12-16"));
-
-
-
             List<Action> actions = new ArrayList<>();
             List<Action> actions2 = new ArrayList<>();
             List<Action> actions3 = new ArrayList<>();
             List<Action> actions4 = new ArrayList<>();
             List<Action> actions5 = new ArrayList<>();
-
-
             actions.add(newAction1);
             actions2.add(newAction2);
             actions2.add(newAction6);
@@ -71,17 +72,61 @@ public class BootStrapService {
             actions5.add(newAction13);
 
 
-            Claim claim = new Claim("Nixon", "Paddy", Date.valueOf("2022-10-10"), "Pet", "", "", null , "", "Hamster", "Dwarf", 250.00,"Expensive Hamster. Escaped out the back door", "Hamster imported from Timbucktoo", "Awaiting Assessment", "Pending", actions);
-            Claim claim2 = new Claim("Younger", "Louise", Date.valueOf("2022-12-14"), "Motor", "Honda", "Prelude", 1999 , "", "", "", 400.00,"Reversed into a wall, damaged bumper", "", "In Progress", "Pending", actions2);
-            Claim claim3 = new Claim("Quinn", "Anne Marie", Date.valueOf("2022-11-12"), "Property", "", "", null , "12 Up The Street, Galliagh, Derry", "", "", 500.00,"Windows at front of house smashed", "Criminal Damage. Incident has been reported to police", "Accepted - Awaiting Payment", "500.00", actions3);
-            Claim claim4 = new Claim("Temple", "Chris", Date.valueOf("2023-01-01"), "Motor", "Nissan", "Juke", 2013 , "", "", "", 150.00,"Wing mirror clipped off", "", "In Progress", "Pending", actions4);
-            Claim claim5 = new Claim("Williamson", "Mark", Date.valueOf("2022-12-09"), "Pet", "", "", null , "", "Dog", "Chihuahua", 300.00,"Vet Billsr", "Dog has broken leg", "Rejected", "0.00", actions5);
 
+
+
+
+
+
+            Task newTask1 = new Task("Send in Vet report", "Completed", 1);
+            Task newTask2 = new Task("Send in Photos of damage", "Outstanding", 2);
+            Task newTask3 = new Task("Send in Photos of damage", "Completed", 3);
+            Task newTask4 = new Task("Send in Photos of damage", "Completed", 4);
+            Task newTask5 = new Task("Send in Photos of damage", "Completed", 5);
+//            List<Task> tasks1 = new ArrayList<>();
+//            List<Task> tasks2 = new ArrayList<>();
+//            List<Task> tasks3 = new ArrayList<>();
+//            List<Task> tasks4 = new ArrayList<>();
+//            List<Task> tasks5 = new ArrayList<>();
+//
+//            tasks1.add(newTask1);
+//            tasks2.add(newTask2);
+//            tasks3.add(newTask3);
+//            tasks4.add(newTask4);
+
+            taskRepository.save(newTask1);
+            taskRepository.save(newTask2);
+            taskRepository.save(newTask3);
+            taskRepository.save(newTask4);
+            taskRepository.save(newTask5);
+
+
+
+
+
+
+
+
+
+            Claim claim = new Claim("Nixon", "Paddy", Date.valueOf("2022-10-10"), "Pet", "", "", null , "", "Hamster", "Dwarf", 250.00,"Expensive Hamster. Escaped out the back door", "Hamster imported from Timbucktoo", "Awaiting Assessment", "Pending", actions, null);
+            Claim claim2 = new Claim("Younger", "Louise", Date.valueOf("2022-12-14"), "Motor", "Honda", "Prelude", 1999 , "", "", "", 400.00,"Reversed into a wall, damaged bumper", "", "In Progress", "Pending", actions2, null);
+            Claim claim3 = new Claim("Quinn", "Anne Marie", Date.valueOf("2022-11-12"), "Property", "", "", null , "12 Up The Street, Galliagh, Derry", "", "", 500.00,"Windows at front of house smashed", "Criminal Damage. Incident has been reported to police", "Accepted - Awaiting Payment", "500.00", actions3, null);
+            Claim claim4 = new Claim("Temple", "Chris", Date.valueOf("2023-01-01"), "Motor", "Nissan", "Juke", 2013 , "", "", "", 150.00,"Wing mirror clipped off", "", "In Progress", "Pending", actions4, null);
+            Claim claim5 = new Claim("Williamson", "Mark", Date.valueOf("2022-12-09"), "Pet", "", "", null , "", "Dog", "Chihuahua", 300.00,"Vet Billsr", "Dog has broken leg", "Rejected", "0.00", actions5, null);
             claimRepository.save(claim);
             claimRepository.save(claim2);
             claimRepository.save(claim3);
             claimRepository.save(claim4);
             claimRepository.save(claim5);
+
+
+
+
+
+
+
+
+
         }
 
 
