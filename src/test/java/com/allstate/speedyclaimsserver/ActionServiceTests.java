@@ -3,6 +3,7 @@ package com.allstate.speedyclaimsserver;
 
 import com.allstate.speedyclaimsserver.data.ActionRepository;
 import com.allstate.speedyclaimsserver.data.ClaimRepository;
+import com.allstate.speedyclaimsserver.data.TaskRepository;
 import com.allstate.speedyclaimsserver.domain.Action;
 import com.allstate.speedyclaimsserver.service.ActionService;
 import nonapi.io.github.classgraph.utils.Assert;
@@ -37,6 +38,9 @@ public class ActionServiceTests {
 
     @MockBean
     private ClaimRepository claimRepository;
+
+    @MockBean
+    private TaskRepository taskRepository;
 
     @Test
     public void testGetActionsByPolicy(){

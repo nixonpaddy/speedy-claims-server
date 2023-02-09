@@ -79,26 +79,18 @@ public class BootStrapService {
 
 
             Task newTask1 = new Task("Send in Vet report", "Completed", 1);
+            Task newTask6 = new Task("Send in Vets bill", "Outstanding", 1);
             Task newTask2 = new Task("Send in Photos of damage", "Outstanding", 2);
-            Task newTask3 = new Task("Send in Photos of damage", "Completed", 3);
-            Task newTask4 = new Task("Send in Photos of damage", "Completed", 4);
-            Task newTask5 = new Task("Send in Photos of damage", "Completed", 5);
-//            List<Task> tasks1 = new ArrayList<>();
-//            List<Task> tasks2 = new ArrayList<>();
-//            List<Task> tasks3 = new ArrayList<>();
-//            List<Task> tasks4 = new ArrayList<>();
-//            List<Task> tasks5 = new ArrayList<>();
-//
-//            tasks1.add(newTask1);
-//            tasks2.add(newTask2);
-//            tasks3.add(newTask3);
-//            tasks4.add(newTask4);
-
+            Task newTask7 = new Task("Send in evidence of personal injury", "Outstanding", 2);
+            Task newTask3 = new Task("Customer to send up to date payment details", "Outstanding", 3);
+            Task newTask4 = new Task("Send in Photos of damage", "Outstanding", 4);
+            Task newTask5 = new Task("Send in Vets report", "Completed", 5);
             taskRepository.save(newTask1);
             taskRepository.save(newTask2);
             taskRepository.save(newTask3);
             taskRepository.save(newTask4);
             taskRepository.save(newTask5);
+            taskRepository.save(newTask6);
 
 
 
@@ -118,15 +110,6 @@ public class BootStrapService {
             claimRepository.save(claim3);
             claimRepository.save(claim4);
             claimRepository.save(claim5);
-
-
-
-
-
-
-
-
-
         }
 
 

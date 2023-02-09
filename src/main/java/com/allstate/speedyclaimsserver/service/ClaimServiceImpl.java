@@ -55,9 +55,6 @@ public class ClaimServiceImpl implements ClaimService {
             claim.setClaimStatus("Transferred");
         }
 
-
-
-
         return claimRepository.save(claim);
     }
 
@@ -182,8 +179,13 @@ public class ClaimServiceImpl implements ClaimService {
         Set<Claim> foundClaims = new HashSet<>();
 
         for(Claim claim : allClaims){
-            if(claim.getClaimStatus().equals("Awaiting Assessment") ){
-                foundClaims.add(claim);
+            if(!claim.getClaimStatus().equals("Accepted - Paid")){
+                if(!claim.getClaimStatus().equals("Rejected")) {
+                    if(!claim.getClaimStatus().equals("Transferred")) {
+
+                        foundClaims.add(claim);
+                    }
+                }
             }
         }
 
@@ -199,7 +201,7 @@ public class ClaimServiceImpl implements ClaimService {
         Set<Claim> foundClaims = new HashSet<>();
 
         for(Claim claim : allClaims){
-            if(claim.getClaimStatus().equals("Rejected") || claim.getClaimStatus().equals("Accepted - Paid")  ){
+            if(claim.getClaimStatus().equals("Rejected") || claim.getClaimStatus().equals("Accepted - Paid") || claim.getClaimStatus().equals("Transferred")  ){
                 foundClaims.add(claim);
             }
         }
